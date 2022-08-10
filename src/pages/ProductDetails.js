@@ -3,8 +3,8 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useDispatch } from "react-redux/es/hooks/useDispatch";
-import { addCart } from "../redux/action";
-
+import { addToCart } from "../slices/cartSlice";
+import { useNavigate } from "react-router-dom";
 const ProductDetails = () => {
   
   const { id } = useParams();
@@ -12,8 +12,10 @@ const ProductDetails = () => {
   const [loading, setLoading] = useState(false);
 
   const dispatch = useDispatch();
+  const history = useNavigate();
   const addProduct = (product) => {
-    dispatch(addCart(product));
+    dispatch(addToCart(product));
+    history.push("/cart");
   }
 
   useEffect(() => {
